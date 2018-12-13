@@ -1,37 +1,62 @@
-#PyBank
+#PyPoll
+
 
 import os
 import csv
-from datetime import datetime
 
-csvpath = "/Users/patrickwolfe/GWARL201811DATA3/02-Homework/03-Python/Instructions/PyBank/Resources/budget_data.csv"
+csvpath = "/Users/patrickwolfe/GWARL201811DATA3/02-Homework/03-Python/Instructions/PyPoll/Resources/election_data.csv"
 
-min_month = datetime.strftime(Jan-2011, '%m-%Y')
-max_month = min_month
-print(min_month)
-
-
-# with open(csvpath) as csvfile:
-#     csvreader = csv.reader(csvfile, delimiter=",")
-#     for row in csvreader:
-#         if datetime.strptime(row[0]) < min_month
-#             min_month = row[0]
-#         if row[0] > max_month
-#             max_month = row[0]
-#         if row[0] - last_month_profit_loss > greatest_increase_profits
-#             greatest_increase_profits = row[0] - last_month_profit_loss
-#         if row[0] - last_month_profit_loss < greatest_decrease_profits
-#             greatest_decrease_profits = row[0] - last_month_profit_loss
-#         row[0] = last_month_profit_loss
-
-        
-#     total_months = max_month - min_month
-#     total_profit_loss = row[1] + total_profit_loss
-#     average_change = total_profit_loss / total_months
+total_votes = 0 
+khan_votes = 0
+correy_votes = 0
+li_votes = 0
+otooley_votes  = 0
+khan_percent = 0.0
+correy_percent = 0.0
+li_percent = 0.0
+otooley_percent= 0.0
 
 
-# print(f"Total Months: {total_months}")
-# print(f"Total ${total_profit_loss}")
-# print(f"Average  Change: {average_change}")
-# print(f"Greatest Increase in Profits: {greatest_increase_profits}")
-# print(f"Greatest Decrease in Profits: {greatest_decrease_profits}")
+with open(csvpath) as csvfile:
+    csvreader = csv.reader(csvfile, delimiter=",")
+    for row in csvreader:
+        total_votes = total_votes + 1
+        if row[2] == "Khan":
+            khan_votes = khan_votes + 1
+        elif row[2] == "Correy":
+            correy_votes = correy_votes + 1
+        elif row[2] == "Li":
+            li_votes = li_votes + 1
+        elif row[2] == "O'Tooley":
+            otooley_votes = otooley_votes + 1
+    
+khan_percent = round(khan_votes / total_votes * 100, 2)
+correy_percent = round(correy_votes / total_votes * 100, 2)
+li_percent = round(li_votes / total_votes * 100, 2)
+otooley_percent = round(otooley_votes / total_votes *100, 2)
+
+if (khan_votes > correy_votes) and (khan_votes > li_votes) and (khan_votes > otooley_votes):
+    top_vote_getter = "Khan"
+elif (correy_votes > khan_votes) and (correy_votes > li_votes) and (correy_votes > otooley_votes):
+    top_vote_getter = "Correy"
+elif (li_votes > correy_votes) and (li_votes > khan_votes) and (li_votes > otooley_votes):
+    top_vote_getter = "Li"
+else:
+    top_vote_getter = "O'Tooley"
+    
+
+
+
+print("Election Results")
+print("-------------------------")
+print(f"Total Votes: {total_votes}")
+print("-------------------------")
+print(f"Khan: {khan_percent}% ({khan_votes})")
+print(f"Correy: {correy_percent}% ({correy_votes})")
+print(f"Li: {li_percent}% ({li_votes})")
+print(f"O'Tooley: {otooley_percent}% ({otooley_votes})")
+print("-------------------------")
+print(f"Winner: {top_vote_getter}")
+
+
+# Winner: Khan
