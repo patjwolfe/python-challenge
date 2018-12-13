@@ -57,6 +57,3 @@ print(f"Li: {li_percent}% ({li_votes})")
 print(f"O'Tooley: {otooley_percent}% ({otooley_votes})")
 print("-------------------------")
 print(f"Winner: {top_vote_getter}")
-
-
-# Winner: Khan
